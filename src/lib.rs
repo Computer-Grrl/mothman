@@ -1,5 +1,5 @@
-pub mod identity;
 pub mod error;
+pub mod identity;
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right

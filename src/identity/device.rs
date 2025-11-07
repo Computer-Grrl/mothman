@@ -7,10 +7,8 @@ pub struct DeviceIdentity {
     device_id: [u8; 32],
     // Device keypair used exclisively for MLS operations
     keypair: Ed25519Keypair,
-
     // Delivery addresses (ephemeral, rotatable)
     delivery_addresses: Vec<DeliveryAddress>,
-
     // Unix timestamp of creation
     created_timestamp: u64,
 }
