@@ -1,8 +1,8 @@
 use ed25519_dalek::{Signature, SigningKey, VerifyingKey};
-use openmls::prelude::{BasicCredential, Credential, CredentialWithKey, SignatureScheme};
+use openmls::prelude::SignatureScheme;
 use openmls_traits::signatures::SignerError;
 use rand_leg::{RngCore, rngs::OsRng};
-use std::{collections::HashMap, marker::PhantomData, num::NonZeroU16};
+use std::{collections::HashMap, num::NonZeroU16};
 
 use crate::{
     error::Error,

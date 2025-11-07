@@ -1,3 +1,5 @@
+#![forbid(unsafe_code, clippy::all, unused_imports)]
+
 use openmls::prelude::Ciphersuite;
 
 pub mod error;

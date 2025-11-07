@@ -1,8 +1,5 @@
 use ed25519_dalek::Signer;
-use openmls::prelude::{
-    CredentialWithKey, HpkeKeyPair, HpkePrivateKey, KeyPackage, KeyPackageBundle, SecretVLBytes,
-    SignaturePublicKey,
-};
+use openmls::prelude::{CredentialWithKey, KeyPackage, KeyPackageBundle};
 use openmls_rust_crypto::OpenMlsRustCrypto;
 use rand_leg::{RngCore, rngs::OsRng};
 use sha2::{Digest, Sha256};
