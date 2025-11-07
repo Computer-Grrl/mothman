@@ -1,0 +1,13 @@
+[package]
+name = "mothman"
+authors = ["Archmage"]
+description = "Rust client for the Cryptid protocol"
+readme = "./reame.md"
+version = "0.1.0"
+edition = "2024"
+keywords = ["chat", "cryptid"]
+repository = "https://github.com/Computer-Grrl/mothman"
+license = "MIT OR Apache-2.0"
+
+
+[dependencies]
