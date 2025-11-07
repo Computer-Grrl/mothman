@@ -9,5 +9,7 @@ keywords = ["chat", "cryptid"]
 repository = "https://github.com/Computer-Grrl/mothman"
 license = "MIT OR Apache-2.0"
 
-
 [dependencies]
+ed25519-dalek = { version = "2.2.0", features = ["rand_core"] }
+rand_leg = {package="rand", version= "0.8.*"}
+time = "0.3.44"
