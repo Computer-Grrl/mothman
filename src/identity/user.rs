@@ -1,4 +1,4 @@
-use ed25519_dalek::{Signer};
+use ed25519_dalek::Signer;
 use rand_leg::rngs::OsRng;
 
 use crate::identity::device::DeliveryAddress;

@@ -1,6 +1,8 @@
 use ed25519_dalek::{Signature, SigningKey, VerifyingKey};
-use rand_leg::{rngs::OsRng, RngCore};
-use std::{collections::HashMap, num::NonZeroU16};
+use openmls::prelude::{BasicCredential, Credential, CredentialWithKey, SignatureScheme};
+use openmls_traits::signatures::SignerError;
+use rand_leg::{RngCore, rngs::OsRng};
+use std::{collections::HashMap, marker::PhantomData, num::NonZeroU16};
 
 use crate::{
     error::Error,
@@ -49,4 +51,49 @@ pub enum InfoPackageType {
 
 pub enum InfoPackageContent {
     Identity(IdentityInfoPackage),
+}
+
+/// Wrapper for SigningKey
+struct Ed25519KeypairWrap<T: ed25519_dalek::Signer<Signature>> {
+    pair: T,
+}
+
+impl<T: ed25519_dalek::Signer<Signature>> Ed25519KeypairWrap<T> {
+    //do not use, panics on fail
+    fn _ed25519_sign(&self, payload: &[u8]) -> Vec<u8> {
+        self.pair.sign(payload).to_vec()
+    }
+    //use this instead
+    fn ed25519_try_sign(&self, payload: &[u8]) -> Result<Vec<u8>, SignerError> {
+        Ok(self.pair.sign(payload).to_vec())
+    }
+}
+
+//TODO move smoewhere better suited
+impl<T: ed25519_dalek::Signer<Signature>> openmls_traits::signatures::Signer
+    for Ed25519KeypairWrap<T>
+{
+    fn sign(&self, payload: &[u8]) -> Result<Vec<u8>, SignerError> {
+        self.ed25519_try_sign(payload)
+            .map_err(|e| SignerError::SigningError)
+            .map(|s| s.to_vec())
+    }
+
+    fn signature_scheme(&self) -> SignatureScheme {
+        SignatureScheme::ED25519
+    }
+}
+
+impl<T: ed25519_dalek::Signer<Signature>> From<T> for Ed25519KeypairWrap<T> {
+    fn from(value: T) -> Self {
+        Ed25519KeypairWrap { pair: value }
+    }
+}
+
+impl<T: Clone + ed25519_dalek::Signer<Signature>> From<&T> for Ed25519KeypairWrap<T> {
+    fn from(value: &T) -> Self {
+        Ed25519KeypairWrap {
+            pair: value.clone(),
+        }
+    }
 }

@@ -11,5 +11,10 @@ license = "MIT OR Apache-2.0"
 
 [dependencies]
 ed25519-dalek = { version = "2.2.0", features = ["rand_core"] }
+hex = "0.4.3"
+openmls = "0.7.1"
+openmls_rust_crypto = "0.4.1"
+openmls_traits = "0.4.1"
 rand_leg = {package="rand", version= "0.8.*"}
+sha2 = "0.10.9"
 time = "0.3.44"
