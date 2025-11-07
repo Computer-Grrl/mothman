@@ -11,7 +11,6 @@ use crate::{
     CIPHERSUITE,
     error::Error,
     identity::{Ed25519Keypair, Ed25519KeypairWrap, Ed25519Signature},
-    mls::MLSCredential,
 };
 
 /// Device-level identity (MLS Layer)
